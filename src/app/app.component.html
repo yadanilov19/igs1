@@ -1,2 +1,8 @@
-<button (click)="refr = random()">refresh</button>
-<app-draw-place [refresh]="refr" ></app-draw-place>
+<div style="width: 900px; height: 900px; float: left">
+  <app-draw-place [width]="900" [height]="900"></app-draw-place>
+</div>
+<div style="float: left; margin-left: 910px;">
+  <div class="" style="width: 100%;">
+    <app-controls></app-controls>
+  </div>
+</div>
