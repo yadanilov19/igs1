@@ -1,0 +1,26 @@
+<ul class="list-group list-group-flush">
+  <li class="list-group-item text-center">
+    uMax = <span style="font-size: 0.9em">{{SegmentsParams.u.value}}</span>
+    <div style="clear: both;height: 2px;"></div>
+    <p-slider [(ngModel)]="SegmentsParams.u.value" [min]="SegmentsParams.u.min" [max]="SegmentsParams.u.max" [step]="1"
+              (ngModelChange)="SendEvent()"></p-slider>
+  </li>
+  <li class="list-group-item text-center">
+    vMax = <span style="font-size: 0.9em">{{SegmentsParams.v.value}}</span>
+    <div style="clear: both;height: 2px;"></div>
+    <p-slider [(ngModel)]="SegmentsParams.v.value" [min]="SegmentsParams.v.min" [max]="SegmentsParams.v.max" [step]="1"
+              (ngModelChange)="SendEvent()"></p-slider>
+  </li>
+  <li class="list-group-item text-center">
+    uCount = <span style="font-size: 0.9em">{{SegmentsParams.u.count}}</span>
+    <div style="clear: both;height: 2px;"></div>
+    <p-slider [(ngModel)]="SegmentsParams.u.count" [min]="0" [max]="SegmentsParams.u.maxCount" [step]="1"
+              (ngModelChange)="SendEvent()"></p-slider>
+  </li>
+  <li class="list-group-item text-center">
+    vCount = <span style="font-size: 0.9em">{{SegmentsParams.v.count}}</span>
+    <div style="clear: both;height: 2px;"></div>
+    <p-slider [(ngModel)]="SegmentsParams.v.count" [min]="0" [max]="SegmentsParams.v.maxCount" [step]="1"
+              (ngModelChange)="SendEvent()"></p-slider>
+  </li>
+</ul>

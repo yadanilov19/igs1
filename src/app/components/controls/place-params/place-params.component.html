@@ -1,0 +1,14 @@
+<ul class="list-group list-group-flush">
+  <li class="list-group-item text-center">
+    a = <span style="font-size: 0.9em">{{PlaceParams.a.cur}}</span>
+    <div style="clear: both;height: 2px;"></div>
+    <p-slider [(ngModel)]="PlaceParams.a.cur" [min]="PlaceParams.b.min" [max]="PlaceParams.b.max" [step]="1"
+              (ngModelChange)="SendEvent()"></p-slider>
+  </li>
+  <li class="list-group-item text-center">
+    b = <span style="font-size: 0.9em">{{PlaceParams.b.cur}}</span>
+    <div style="clear: both;height: 2px;"></div>
+    <p-slider [(ngModel)]="PlaceParams.b.cur" [min]="PlaceParams.b.min" [max]="PlaceParams.b.max" [step]="1"
+              (ngModelChange)="SendEvent()"></p-slider>
+  </li>
+</ul>

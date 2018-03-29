@@ -85,3 +85,23 @@ export class Tor extends ShapeBase {
     this.z = this.b * Math.sin(this.v);
   }
 }
+
+export class Elipsoid extends ShapeBase {
+  public constructor() {
+    super();
+    this.uMin = -90;
+    this.uInitMax = 90;
+    this.uMax = 90;
+    this.vMin = 0;
+    this.vInitMax = this.vMax = 360;
+    this.name = 'Elipsoid';
+  }
+
+  calc() {
+    this.u *= Math.PI / 180;
+    this.v *= Math.PI / 180;
+    this.x = this.a * Math.cos(this.u) * Math.cos(this.v);
+    this.y = this.b * Math.cos(this.u) * Math.sin(this.v);
+    this.z = -this.b * Math.sin(this.u);
+  }
+}

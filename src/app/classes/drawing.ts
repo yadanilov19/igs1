@@ -7,7 +7,8 @@ import {Observable} from 'rxjs/Observable';
 
 import 'rxjs/add/observable/of';
 import {isNullOrUndefined} from 'util';
-import {Utils} from "./utils";
+import {Utils} from './utils';
+import {FillTypes} from './fill-types.enum';
 
 export class Drawing {
   matrix: TransformMatrix = TransformMatrix.Identity();
@@ -16,17 +17,20 @@ export class Drawing {
   shape: ShapeBase;
   rotateMatrix: TransformMatrix = TransformMatrix.Identity();
   scaleMatrix: TransformMatrix = TransformMatrix.Identity();
-  width = 900;
-  height = 900;
-  frontColor = {
-    R: 123,
-    G: 255,
-    B: 255
-  };
-  backColor = {
-    R: 255,
-    G: 0,
-    B: 255
+  width = 800;
+  height = 800;
+
+  Colors = {
+    front: {
+      r: 0,
+      g: 0,
+      b: 0
+    },
+    back: {
+      r: 0,
+      g: 0,
+      b: 0
+    }
   };
 
   set Width(value) {
@@ -37,12 +41,21 @@ export class Drawing {
     this.height = value;
   }
 
+  set ChangeShape(shape) {
+    this.Init(shape);
+  }
+
   Params: {
-    IsFlat: boolean,
-    zIsSort: boolean
-  } = {IsFlat: true, zIsSort: true};
+    type: FillTypes,
+    SortByZ: boolean
+  }
+    = {type: FillTypes.Flat, SortByZ: true};
 
   constructor(shape: ShapeBase) {
+    this.Init(shape);
+  }
+
+  Init(shape) {
     this.shape = shape;
     this.createPointsAndPolygons();
     this.calculatePoints();
@@ -53,7 +66,9 @@ export class Drawing {
     this.calculatePoints();
   }
 
-  rotate(val: { x: number, y: number, z: number }) {
+  rotate(val: {
+    x: number, y: number, z: number
+  }) {
     if (!isNullOrUndefined(val.x)) {
       this.rotateMatrix = TransformMatrix.Multipy(this.rotateMatrix, TransformMatrix.RotateOX(val.x));
     }
@@ -70,7 +85,7 @@ export class Drawing {
         this.points[i][j].setPoint(HomogenPoint.ApplyTrasformMatrix(this.shape.func(i, j), this.matrix));
       }
     }
-    if (this.Params.IsFlat && this.Params.zIsSort) {
+    if (this.Params.type === FillTypes.Flat && this.Params.SortByZ) {
       this.sortPolygons();
     }
   }
@@ -112,22 +127,21 @@ export class Drawing {
     this.calculatePoints();
   }
 
-  changeType(_isFlat, _zIsSort) {
-    this.Params.IsFlat = _isFlat;
-    this.Params.zIsSort = _zIsSort;
+  SetParams(params) {
+    this.Params = params;
     this.calculatePoints();
   }
 
   getColor(polygon: Polygon) {
     let cos = polygon.getCos();
-    let col = this.frontColor;
+    let col = this.Colors.front;
     if (cos < 0) {
-      col = this.backColor;
+      col = this.Colors.back;
       cos = -cos;
     }
-    const r = (col.R * cos);
-    const g = (col.G * cos);
-    const b = (col.B * cos);
+    const r = (col.r * cos);
+    const g = (col.g * cos);
+    const b = (col.b * cos);
     return Utils.rgbToHex(r, g, b);
   }
 
@@ -148,16 +162,16 @@ export class Drawing {
       cxt.closePath();
       // console.log(polygon);
       // special Konva.js method
-      if (this.Params.IsFlat) {
+      if (this.Params.type === FillTypes.Flat) {
         cxt.lineWidth = 1;
         cxt.fillStyle = this.getColor(polygon);
         cxt.strokeStyle = this.getColor(polygon);
         cxt.fill();
+      } else {
+        cxt.strokeStyle = '#000';
       }
 
       cxt.stroke();
-
-      // cxt.clip('evenodd');
     }
   }
 }

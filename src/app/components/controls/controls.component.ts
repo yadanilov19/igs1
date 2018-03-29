@@ -6,7 +6,6 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./controls.component.css']
 })
 export class ControlsComponent implements OnInit {
-
   constructor() {
   }
 

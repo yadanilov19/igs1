@@ -1,0 +1,5 @@
+<div class="card-body">
+  <p-dropdown [options]="Shapes" [ngModel]="SelectedShape"
+              (ngModelChange)="shapeService.ShapeChange.next($event); SelectedShape = $event"
+              optionLabel="name"></p-dropdown>
+</div>

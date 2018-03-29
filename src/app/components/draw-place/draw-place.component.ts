@@ -9,6 +9,8 @@ import 'rxjs/add/operator/switchMap';
 import {Drawing} from '../../classes/drawing';
 import {Paraboloid, Tor} from '../../classes/shapes';
 import {ActivatedRoute} from '@angular/router';
+import {ShapeService} from '../services/shape/shape.service';
+import {isNullOrUndefined} from 'util';
 
 @Component({
   selector: 'app-draw-place',
@@ -22,14 +24,17 @@ export class DrawPlaceComponent implements OnInit, AfterViewInit {
   @Input() height = 900;
 
   ngAfterViewInit(): void {
-    this.drawing({x: 0, y: 0, z: 0});
+    this.drawing();
   }
 
-  constructor(private activateRoute: ActivatedRoute) {
-    this.drawBehaviour = new Drawing(new Paraboloid());
+  constructor(private shapeService: ShapeService) {
+    this.shapeService.ShapeChange.next(this.shapeService.CurrentShape);
   }
 
-  drawing(rotation: { x: number, y: number, z: number }) {
+  drawing(rotation?: { x: number, y: number, z: number }) {
+    if (isNullOrUndefined(rotation)) {
+      rotation = {x: 0, y: 0, z: 0};
+    }
     this.drawBehaviour.rotate(rotation);
     const ctx: CanvasRenderingContext2D =
       this.canvasRef.nativeElement.getContext('2d');
@@ -42,8 +47,32 @@ export class DrawPlaceComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.captureEvents(this.canvasRef.nativeElement);
 
-    this.activateRoute.params.subscribe(params => {
-      console.log(params);
+
+    this.drawBehaviour = new Drawing(this.shapeService.CurrentShape.value);
+    this.shapeService.ShapeChange.subscribe(shape => {
+      this.drawBehaviour.ChangeShape = shape.value;
+      this.drawing();
+    });
+    this.shapeService.FillParams.subscribe(fillParams => {
+      this.drawBehaviour.SetParams(fillParams);
+      this.drawing();
+    });
+    this.shapeService.PlaceParams.subscribe(pp => {
+      this.drawBehaviour.shape.a = pp.a.cur;
+      this.drawBehaviour.shape.b = pp.b.cur;
+      this.drawing();
+    });
+    this.shapeService.ColorChange.subscribe(color => {
+      this.drawBehaviour.Colors = color;
+      this.drawing();
+    });
+    this.shapeService.SegmentsParams.subscribe(sp => {
+      this.drawBehaviour.shape.vCount = sp.v.count;
+      this.drawBehaviour.shape.uCount = sp.u.count;
+      this.drawBehaviour.shape.uMax = sp.u.value;
+      this.drawBehaviour.shape.vMax = sp.v.value;
+      this.drawBehaviour.Init(this.drawBehaviour.shape);
+      this.drawing();
     });
   }
 
@@ -56,7 +85,7 @@ export class DrawPlaceComponent implements OnInit, AfterViewInit {
           .fromEvent(canvasEl, 'mousemove')
           .takeUntil(Observable.fromEvent(canvasEl, 'mouseup'))
           .takeUntil(Observable.fromEvent(canvasEl, 'mouseleave'))
-          .pairwise()
+          .pairwise();
       })
       .subscribe((res: [MouseEvent, MouseEvent]) => {
         const rect = canvasEl.getBoundingClientRect();

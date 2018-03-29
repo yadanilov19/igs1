@@ -1,0 +1,18 @@
+<div class="card-body container">
+  <div class="row">
+    <div class="col">
+      <p style="display: inline-block;">back</p>
+      <div style="display: inline-block;">
+        <p-colorPicker [(ngModel)]="Colors.back" format="rgb" (ngModelChange)="SendEvent()"
+                       label="test"></p-colorPicker>
+      </div>
+    </div>
+    <div class="col">
+      <p style="display: inline-block;">front</p>
+      <div style="display: inline-block;">
+        <p-colorPicker [(ngModel)]="Colors.front" format="rgb" (ngModelChange)="SendEvent()"
+                       label="test"></p-colorPicker>
+      </div>
+    </div>
+  </div>
+</div>
