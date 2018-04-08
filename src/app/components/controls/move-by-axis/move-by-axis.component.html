@@ -1,0 +1,25 @@
+<div class="card text-center">
+  <div class="card-header">
+    <h6>Вращение</h6>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item text-center">
+      X` = <span style="font-size: 0.9em">{{x}}</span>
+      <div style="clear: both;height: 2px;"></div>
+      <p-slider [(ngModel)]="x" [min]="0" [max]="360" [step]="1"
+                (ngModelChange)="SendEvent('x')"></p-slider>
+    </li>
+    <li class="list-group-item text-center">
+      Y` = <span style="font-size: 0.9em">{{y}}</span>
+      <div style="clear: both;height: 2px;"></div>
+      <p-slider [(ngModel)]="y" [min]="0" [max]="360" [step]="1"
+                (ngModelChange)="SendEvent('y')"></p-slider>
+    </li>
+    <li class="list-group-item text-center">
+      Z` = <span style="font-size: 0.9em">{{z}}</span>
+      <div style="clear: both;height: 2px;"></div>
+      <p-slider [(ngModel)]="z" [min]="0" [max]="360" [step]="1"
+                (ngModelChange)="SendEvent('z')"></p-slider>
+    </li>
+  </ul>
+</div>

@@ -273,7 +273,7 @@ export class Drawing {
     cxt.lineTo(this.axis[nameAxis].value.ToPoint2d.X, this.axis[nameAxis].value.ToPoint2d.Y);
     let prew: any = null;
     cxt.font = '32px Georgia';
-    cxt.fillText(nameAxis, this.axis[nameAxis].value.ToPoint2d.X + 10, this.axis[nameAxis].value.ToPoint2d.Y - 10);
+    cxt.fillText(`${nameAxis}\``, this.axis[nameAxis].value.ToPoint2d.X + 10, this.axis[nameAxis].value.ToPoint2d.Y - 10);
     for (const point of this.axis[nameAxis].arrow) {
       cxt.lineTo(point.ToPoint2d.X, point.ToPoint2d.Y);
       cxt.moveTo(this.axis[nameAxis].value.ToPoint2d.X, this.axis[nameAxis].value.ToPoint2d.Y);
