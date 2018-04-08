@@ -17,6 +17,7 @@ import {ShapeSelectorComponent} from './components/controls/shape-selector/shape
 import {ShapeService} from './components/services/shape/shape.service';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CheckboxModule, ColorPickerModule, RadioButtonModule, SliderModule} from 'primeng/primeng';
+import {MoveByAxisComponent} from './components/controls/move-by-axis/move-by-axis.component';
 
 const appRoutes: Routes = [
   { path: '',
@@ -33,7 +34,8 @@ const appRoutes: Routes = [
     PlaceParamsComponent,
     FillParamsComponent,
     SegmentsParamsComponent,
-    ShapeSelectorComponent
+    ShapeSelectorComponent,
+    MoveByAxisComponent
   ],
   imports: [
     BrowserModule,

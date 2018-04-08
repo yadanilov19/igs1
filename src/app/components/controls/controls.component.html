@@ -1,4 +1,4 @@
-<div class="card-columns" style="column-count: 3">
+<div class="card-columns w-100" style="column-count: 3;">
   <div class="card text-center">
     <div class="card-header">
       <h6>Выбор фигуры для отображения</h6>
@@ -13,20 +13,16 @@
   </div>
   <div class="card text-center">
     <div class="card-header">
-      <h6>Place parameters</h6>
+      <h6>Настройки поверхности</h6>
     </div>
     <app-place-params></app-place-params>
   </div>
   <div class="card text-center">
     <div class="card-header">
-      <h6>Segment parameters</h6>
+      <h6>Параметры отрисовки</h6>
     </div>
     <app-segments-params></app-segments-params>
   </div>
-  <div class="card text-center">
-    <div class="card-header">
-      <h6>Color parameters</h6>
-    </div>
-    <app-color-selector></app-color-selector>
-  </div>
+  <app-color-selector></app-color-selector>
+  <app-move-by-axis></app-move-by-axis>
 </div>

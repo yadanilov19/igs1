@@ -1,4 +1,5 @@
 export enum FillTypes {
   Flat,
-  Stroke
+  Stroke,
+  FlatWithSort
 }

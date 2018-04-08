@@ -64,6 +64,27 @@ export class Paraboloid extends ShapeBase {
   }
 }
 
+export class Astroida extends ShapeBase {
+  public constructor() {
+    super();
+    this.uMin = -200;
+    this.uInitMax = this.uMax = 200;
+    this.vMin = -200;
+    this.vInitMax = this.vMax = 200;
+    this.a = 15;
+    this.b = 15;
+    this.name = 'Астроида';
+  }
+
+  calc() {
+    this.v *= Math.PI / 180;
+    this.u *= Math.PI / 180;
+    this.x = this.a * Math.pow(Math.sin(this.u), 3);
+    this.y = this.b * Math.pow(Math.cos(this.v), 3);
+    this.z = this.b * Math.pow(Math.cosh(this.v), 3);
+  }
+}
+
 export class Tor extends ShapeBase {
   public constructor() {
     super();
@@ -103,5 +124,29 @@ export class Elipsoid extends ShapeBase {
     this.x = this.a * Math.cos(this.u) * Math.cos(this.v);
     this.y = this.b * Math.cos(this.u) * Math.sin(this.v);
     this.z = -this.b * Math.sin(this.u);
+  }
+}
+
+export class Cone extends ShapeBase {
+  public constructor() {
+    super();
+    this.uMin = -90;
+    this.uInitMax = 0;
+    this.uMax = 0;
+    this.vMin = -90;
+    this.vInitMax = this.vMax = 360;
+    this.name = 'Cone';
+    this.a = 0.2;
+    this.b = 2;
+    this.vCount = 10;
+    this.uCount = 3;
+  }
+
+  calc() {
+    // this.u *= Math.PI / 180;
+    this.v *= Math.PI / 180;
+    this.x = this.a * (this.b - this.u) * Math.cos(this.v);
+    this.y = this.a * (this.b - this.u) * Math.sin(this.v);
+    this.z = this.u;
   }
 }

@@ -31,11 +31,16 @@ export class DrawPlaceComponent implements OnInit, AfterViewInit {
     this.shapeService.ShapeChange.next(this.shapeService.CurrentShape);
   }
 
-  drawing(rotation?: { x: number, y: number, z: number }) {
+  drawing(rotation?: { x: number, y: number, z: number }, axis?: boolean) {
     if (isNullOrUndefined(rotation)) {
       rotation = {x: 0, y: 0, z: 0};
     }
-    this.drawBehaviour.rotate(rotation);
+    if (axis) {
+      this.drawBehaviour.rotateAxis(rotation);
+    } else {
+      this.drawBehaviour.rotate(rotation);
+    }
+
     const ctx: CanvasRenderingContext2D =
       this.canvasRef.nativeElement.getContext('2d');
     this.drawBehaviour.Height = this.height;
@@ -73,6 +78,9 @@ export class DrawPlaceComponent implements OnInit, AfterViewInit {
       this.drawBehaviour.shape.vMax = sp.v.value;
       this.drawBehaviour.Init(this.drawBehaviour.shape);
       this.drawing();
+    });
+    this.shapeService.axisMoveChange.subscribe(sp => {
+      this.drawing(sp, true);
     });
   }
 

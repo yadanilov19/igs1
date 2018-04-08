@@ -8,6 +8,7 @@ import {ShapeService} from '../../services/shape/shape.service';
   styleUrls: ['./color-selector.component.css']
 })
 export class ColorSelectorComponent implements OnInit {
+  current = 'front';
   Colors = {
     front: {
       r: 100,
@@ -30,5 +31,13 @@ export class ColorSelectorComponent implements OnInit {
 
   SendEvent() {
     this.sh.ColorChange.next(this.Colors);
+  }
+
+  ChangeTab(tabNum) {
+    this.current = tabNum;
+  }
+
+  getRGB(color) {
+    return `rgb(${color.r},${color.g},${color.b})`;
   }
 }

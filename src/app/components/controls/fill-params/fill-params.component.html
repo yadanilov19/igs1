@@ -1,20 +1,23 @@
 <div style="clear: both"></div>
 <ul class="list-group list-group-flush">
   <li class="list-group-item text-left">
-    <p-radioButton name="fillType" [value]="0" label="Flat" [ngModel]="FillParams.type"
-                   (ngModelChange)="SetType($event); SendEvent();"></p-radioButton>
+    <p-radioButton name="fillType" [value]="0" label="Flat-закраска" [ngModel]="FillParams.type"
+                   (ngModelChange)="SetType($event); "></p-radioButton>
     <div style="clear: both;"></div>
-    <p-radioButton name="fillType" [value]="1" label="Stroke" [ngModel]="FillParams.type"
-                   (ngModelChange)="SetType($event); SendEvent();"></p-radioButton>
+    <p-radioButton name="fillType" [value]="1" label="Каркас" [ngModel]="FillParams.type"
+                   (ngModelChange)="SetType($event); "></p-radioButton>
+    <div style="clear: both;"></div>
+    <p-radioButton name="fillType" [value]="2" label="Flat с сортировкой" [ngModel]="FillParams.type"
+                   (ngModelChange)="SetType($event); "></p-radioButton>
   </li>
-  <li class="list-group-item">
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <p-checkbox [(ngModel)]="FillParams.SortByZ" label="Сортировка по Z" binary="true"
-                      (ngModelChange)="SendEvent()"></p-checkbox>
-        </div>
-      </div>
-    </div>
-  </li>
+  <!--<li class="list-group-item">-->
+  <!--<div class="container">-->
+  <!--<div class="row">-->
+  <!--<div class="col">-->
+  <!--<p-checkbox [(ngModel)]="FillParams.SortByZ" label="Сортировка по Z" binary="true"-->
+  <!--(ngModelChange)="SendEvent()"></p-checkbox>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</div>-->
+  <!--</li>-->
 </ul>

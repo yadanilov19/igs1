@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {Elipsoid, Paraboloid, Tor} from '../../../classes/shapes';
-import {Subject} from "rxjs/Subject";
+import {Astroida, Cone, Elipsoid, Paraboloid, Tor} from '../../../classes/shapes';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable()
 export class ShapeService {
@@ -16,7 +16,15 @@ export class ShapeService {
     {
       name: 'Тор',
       value: new Tor()
-    }
+    },
+    {
+      name: 'Конус',
+      value: new Cone()
+    },
+    // {
+    //   name: 'Астроида',
+    //   value: new Astroida()
+    // }
   ];
   CurrentShape = this.AvalibleShapes[0];
   ShapeChange: Subject<any> = new Subject();
@@ -24,6 +32,7 @@ export class ShapeService {
   PlaceParams: Subject<any> = new Subject();
   ColorChange: Subject<any> = new Subject();
   SegmentsParams: Subject<any> = new Subject();
+  axisMoveChange: Subject<{ x: number, y: number, z: number }> = new Subject();
 
   constructor() {
     this.ShapeChange.subscribe(shape => this.CurrentShape = shape);

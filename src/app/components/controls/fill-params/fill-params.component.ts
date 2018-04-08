@@ -8,22 +8,19 @@ import {ShapeService} from "../../services/shape/shape.service";
   styleUrls: ['./fill-params.component.css']
 })
 export class FillParamsComponent implements OnInit {
-  FillParams: { type: FillTypes, SortByZ: boolean } = {
-    type: FillTypes.Flat,
-    SortByZ: true
+  FillParams: { type: FillTypes } = {
+    type: FillTypes.Stroke
   };
 
   constructor(private sh: ShapeService) {
   }
 
   ngOnInit() {
+
   }
 
   SetType(type: FillTypes) {
     this.FillParams.type = type;
-  }
-
-  SendEvent() {
     this.sh.FillParams.next(this.FillParams);
   }
 

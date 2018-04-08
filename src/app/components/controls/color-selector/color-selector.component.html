@@ -1,18 +1,28 @@
-<div class="card-body container">
-  <div class="row">
-    <div class="col">
-      <p style="display: inline-block;">back</p>
-      <div style="display: inline-block;">
-        <p-colorPicker [(ngModel)]="Colors.back" format="rgb" (ngModelChange)="SendEvent()"
-                       label="test"></p-colorPicker>
-      </div>
-    </div>
-    <div class="col">
-      <p style="display: inline-block;">front</p>
-      <div style="display: inline-block;">
-        <p-colorPicker [(ngModel)]="Colors.front" format="rgb" (ngModelChange)="SendEvent()"
-                       label="test"></p-colorPicker>
-      </div>
-    </div>
+<div class="card text-center">
+  <div class="card-header">
+    <ul class="nav nav-pills card-header-pills">
+      <li class="nav-item" style="cursor: pointer; margin-right: 10px">
+        <a class="nav-link" [style.background]="getRGB(Colors.front)" [class.active]="current === 'front'"
+           (click)="ChangeTab('front')">Фронт</a>
+      </li>
+      <li class="nav-item" style="cursor: pointer">
+        <a class="nav-link" [style.background]="getRGB(Colors.back)" [class.active]="current === 'back'"
+           (click)="ChangeTab('back')">Тыл</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body container text-left tab-content">
+    <small>R: {{Colors[current].r}}</small>
+    <p-slider [(ngModel)]="Colors[current].r" [min]="0" [max]="255" [step]="1"
+              (ngModelChange)="SendEvent()"></p-slider>
+    <br/>
+    <small>G: {{Colors[current].g}}</small>
+    <p-slider [(ngModel)]="Colors[current].g" [min]="0" [max]="255" [step]="1"
+              (ngModelChange)="SendEvent()"></p-slider>
+    <br/>
+    <small>B: {{Colors[current].b}}</small>
+    <p-slider [(ngModel)]="Colors[current].b" [min]="0" [max]="255" [step]="1"
+              (ngModelChange)="SendEvent()"></p-slider>
+    <br/>
   </div>
 </div>
